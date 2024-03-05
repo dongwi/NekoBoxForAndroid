@@ -23,7 +23,7 @@ class FixedLinearLayoutManager(val recyclerView: RecyclerView) :
         state: RecyclerView.State
     ): Int {
         // Matsuri style
-        if (!DataStore.showBottomBar) return super.scrollVerticallyBy(dx, recycler, state)
+//        if (!DataStore.showBottomBar) return super.scrollVerticallyBy(dx, recycler, state)
 
         // SagerNet Style
         val scrollRange = super.scrollVerticallyBy(dx, recycler, state)

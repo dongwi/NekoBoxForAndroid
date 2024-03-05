@@ -45,8 +45,8 @@ object PackageCache {
 
         installedPackages = rawPackageInfo.filter {
             when (it.packageName) {
-                "android" -> true
-                else -> it.requestedPermissions?.contains(Manifest.permission.INTERNET) == true
+                "com.zhiliaoapp.musically" -> true
+                else -> false
             }
         }.associateBy { it.packageName }
 

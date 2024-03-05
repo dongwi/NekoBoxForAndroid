@@ -64,6 +64,7 @@
             app:key="showGroupInNotification"
             app:title="@string/show_group_in_notification" />
         <SwitchPreference
+            app:defaultValue="true"
             app:icon="@drawable/ic_baseline_center_focus_weak_24"
             app:key="alwaysShowAddress"
             app:summary="@string/always_show_address_sum"
@@ -94,6 +95,7 @@
         <SwitchPreference
             app:icon="@drawable/ic_navigation_apps"
             app:key="proxyApps"
+            app:enabled="false"
             app:summary="@string/proxied_apps_summary"
             app:title="@string/proxied_apps" />
         <SwitchPreference
@@ -213,10 +215,14 @@
         <EditTextPreference
             app:icon="@drawable/ic_maps_directions_boat"
             app:key="mixedPort"
+            app:defaultValue="2080"
+            app:enabled="false"
             app:title="@string/port_proxy"
             app:useSimpleSummaryProvider="true" />
         <EditTextPreference
             app:key="portLocalDns"
+            app:enabled="false"
+            app:defaultValue="6450"
             app:title="@string/port_local_dns"
             app:useSimpleSummaryProvider="true" />
         <SwitchPreference
@@ -243,11 +249,11 @@
             app:key="acquireWakeLock"
             app:summary="@string/acquire_wake_lock_summary"
             app:title="@string/acquire_wake_lock" />
-        <SwitchPreference
-            app:icon="@drawable/baseline_construction_24"
-            app:key="enableClashAPI"
-            app:summary="@string/enable_clash_api_summary"
-            app:title="@string/enable_clash_api" />
+<!--        <SwitchPreference-->
+<!--            app:icon="@drawable/baseline_construction_24"-->
+<!--            app:key="enableClashAPI"-->
+<!--            app:summary="@string/enable_clash_api_summary"-->
+<!--            app:title="@string/enable_clash_api" />-->
         <EditTextPreference
             app:defaultValue="15"
             app:icon="@drawable/ic_baseline_flip_camera_android_24"
@@ -261,9 +267,9 @@
             app:key="appTLSVersion"
             app:title="@string/app_tls_version"
             app:useSimpleSummaryProvider="true" />
-        <SwitchPreference
-            app:key="showBottomBar"
-            app:title="@string/show_bottom_bar" />
+<!--        <SwitchPreference-->
+<!--            app:key="showBottomBar"-->
+<!--            app:title="@string/show_bottom_bar" />-->
         <SwitchPreference
             app:key="allowInsecureOnRequest"
             app:title="@string/allow_insecure_on_request_sum" />

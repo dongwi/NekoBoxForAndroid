@@ -21,7 +21,10 @@ class ProxyService : Service(), BaseService.Interface {
             .apply { acquire() }
     }
 
+    // Serivce中的onBind是抽象方法，所以这里不需要显示指定
     override fun onBind(intent: Intent) = super.onBind(intent)
+
+    // Service和BaseService.Interface都有onStartCommand，所以需要显示指定
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int =
         super<BaseService.Interface>.onStartCommand(intent, flags, startId)
 }

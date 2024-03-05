@@ -114,7 +114,7 @@ class MainActivity : ThemedActivity(),
 
     fun refreshNavMenu(clashApi: Boolean) {
         if (::navigation.isInitialized) {
-            navigation.menu.findItem(R.id.nav_traffic)?.isVisible = clashApi
+//            navigation.menu.findItem(R.id.nav_traffic)?.isVisible = clashApi
 //            navigation.menu.findItem(R.id.nav_tuiguang)?.isVisible = !isPlay
         }
     }
@@ -303,11 +303,12 @@ class MainActivity : ThemedActivity(),
         if (fragment is ConfigurationFragment) {
             binding.stats.allowShow = true
             binding.fab.show()
-        } else if (!DataStore.showBottomBar) {
-            binding.stats.allowShow = false
-            binding.stats.performHide()
-            binding.fab.hide()
         }
+//        else if (!DataStore.showBottomBar) {
+//            binding.stats.allowShow = false
+//            binding.stats.performHide()
+//            binding.fab.hide()
+//        }
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_holder, fragment)
             .commitAllowingStateLoss()
@@ -323,9 +324,9 @@ class MainActivity : ThemedActivity(),
             R.id.nav_group -> displayFragment(GroupFragment())
             R.id.nav_route -> displayFragment(RouteFragment())
             R.id.nav_settings -> displayFragment(SettingsFragment())
-            R.id.nav_traffic -> displayFragment(WebviewFragment())
+//            R.id.nav_traffic -> displayFragment(WebviewFragment())
 //            R.id.nav_tools -> displayFragment(ToolsFragment())
-//            R.id.nav_logcat -> displayFragment(LogcatFragment())
+            R.id.nav_logcat -> displayFragment(LogcatFragment())
 //            R.id.nav_faq -> {
 //                launchCustomTab("https://matsuridayo.github.io/")
 //                return false

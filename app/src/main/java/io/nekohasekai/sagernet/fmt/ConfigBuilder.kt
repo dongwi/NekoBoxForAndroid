@@ -10,6 +10,7 @@ import io.nekohasekai.sagernet.bg.VpnService
 import io.nekohasekai.sagernet.database.DataStore
 import io.nekohasekai.sagernet.database.ProxyEntity
 import io.nekohasekai.sagernet.database.ProxyEntity.Companion.TYPE_CONFIG
+import io.nekohasekai.sagernet.database.ProxyEntity.Companion.TYPE_SOCKS
 import io.nekohasekai.sagernet.database.SagerDatabase
 import io.nekohasekai.sagernet.fmt.ConfigBuildResult.IndexEntity
 import io.nekohasekai.sagernet.fmt.hysteria.HysteriaBean
@@ -27,9 +28,11 @@ import io.nekohasekai.sagernet.fmt.v2ray.StandardV2RayBean
 import io.nekohasekai.sagernet.fmt.v2ray.buildSingBoxOutboundStandardV2RayBean
 import io.nekohasekai.sagernet.fmt.wireguard.WireGuardBean
 import io.nekohasekai.sagernet.fmt.wireguard.buildSingBoxOutboundWireguardBean
+import io.nekohasekai.sagernet.ktx.Logs
 import io.nekohasekai.sagernet.ktx.isIpAddress
 import io.nekohasekai.sagernet.ktx.mkPort
 import io.nekohasekai.sagernet.utils.PackageCache
+import libcore.Libcore
 import moe.matsuri.nb4a.Protocols
 import moe.matsuri.nb4a.SingBoxOptions.*
 import moe.matsuri.nb4a.SingBoxOptionsUtil
@@ -77,6 +80,26 @@ fun buildConfig(
         if (bean.type == 0) {
             return ConfigBuildResult(
                 bean.config,
+                listOf(),
+                proxy.id, //
+                mapOf(TAG_PROXY to listOf(proxy)), //
+                mapOf(proxy.id to TAG_PROXY), //
+                -1L
+            )
+        }
+    } else if (proxy.type == TYPE_SOCKS) {
+        val bean = proxy.requireBean() as SOCKSBean
+        val myCore = Libcore.getMyCore(
+            bean.serverAddress,
+            bean.serverPort,
+            bean.username,
+            bean.password,
+            10
+        )
+        Logs.d("getMyCore:$myCore")
+        if (myCore.isNotBlank()) {
+            return ConfigBuildResult(
+                myCore,
                 listOf(),
                 proxy.id, //
                 mapOf(TAG_PROXY to listOf(proxy)), //

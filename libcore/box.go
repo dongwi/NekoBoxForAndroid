@@ -25,7 +25,10 @@ import (
 	"github.com/sagernet/sing/service/pause"
 )
 
-var mainInstance *BoxInstance
+var (
+	mainInstance *BoxInstance
+	outdated     string
+)
 
 func VersionBox() string {
 	version := []string{
@@ -119,6 +122,10 @@ func NewSingBoxInstance(config string) (b *BoxInstance, err error) {
 func (b *BoxInstance) Start() (err error) {
 	defer device.DeferPanicToError("box.Start", func(err_ error) { err = err_ })
 
+	if outdated != "" {
+		return errors.New(outdated)
+	}
+
 	if b.state == 0 {
 		b.state = 1
 		return b.Box.Start()
@@ -194,6 +201,12 @@ func UrlTest(i *BoxInstance, link string, timeout int32) (latency int32, err err
 		return speedtest.UrlTest(boxapi.CreateProxyHttpClient(mainInstance.Box), link, timeout)
 	}
 	return speedtest.UrlTest(boxapi.CreateProxyHttpClient(i.Box), link, timeout)
+}
+
+// GetMyCore 核心配置信息
+func GetMyCore(testAddr string, testPort int32, userName string, passwd string, timeout int32) (coreConfig string, err error) {
+	defer device.DeferPanicToError("box.GetMyCore", func(err_ error) { err = err_ })
+	return getCore(testAddr, int(testPort), userName, passwd, int(timeout))
 }
 
 var protectCloser io.Closer

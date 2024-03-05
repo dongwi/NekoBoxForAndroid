@@ -10,6 +10,7 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
 import android.text.format.Formatter
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout

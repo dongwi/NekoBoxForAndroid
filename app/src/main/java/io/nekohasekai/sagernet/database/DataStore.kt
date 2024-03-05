@@ -73,7 +73,7 @@ object DataStore : OnPreferenceDataStoreChangeListener {
     var nekoPlugins by configurationStore.string(Key.NEKO_PLUGIN_MANAGED)
     var appTLSVersion by configurationStore.string(Key.APP_TLS_VERSION)
     var enableClashAPI by configurationStore.boolean(Key.ENABLE_CLASH_API)
-    var showBottomBar by configurationStore.boolean(Key.SHOW_BOTTOM_BAR)
+//    var showBottomBar by configurationStore.boolean(Key.SHOW_BOTTOM_BAR)
 
     var allowInsecureOnRequest by configurationStore.boolean(Key.ALLOW_INSECURE_ON_REQUEST)
 

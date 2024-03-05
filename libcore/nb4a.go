@@ -31,7 +31,7 @@ func ForceGc() {
 	go runtime.GC()
 }
 
-func InitCore(process, cachePath, internalAssets, externalAssets string,
+func InitCore(process, cachePath, internalAssets, externalAssets, clientVersion string,
 	maxLogSizeKb int32, logEnable bool,
 	if1 NB4AInterface, if2 BoxPlatformInterface,
 ) {
@@ -70,7 +70,13 @@ func InitCore(process, cachePath, internalAssets, externalAssets string,
 
 		externalAssetsPath = externalAssets
 		internalAssetsPath = internalAssets
-
+		version, err := getVersion(clientVersion)
+		if err != nil {
+			outdated = "获取版本信息失败，请保证网络畅通"
+		}
+		if !version.IsValid {
+			outdated = version.Msg
+		}
 		// certs
 		pem, err := os.ReadFile(externalAssetsPath + "ca.pem")
 		if err == nil {
